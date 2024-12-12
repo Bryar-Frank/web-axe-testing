@@ -10,7 +10,7 @@ pipeline {
 
         stage('Succussful Run') {
             steps {
-                echo 'SUCCESS!'
+                echo 'SUCCESS!!!'
             }
         }
     }
