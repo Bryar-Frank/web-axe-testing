@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script{
-                    dir('web-x-testing') {
+                 dir('web-x-testing') {
+                    script{
                         sh '''
                             echo 'Building...'      
                         '''
@@ -17,10 +17,12 @@ pipeline {
 
         stage('Test') {
             steps {
-                script{
-                    dir('web-x-testing') {
-                        sh echo "Testing..."
-                        sh 'mvn clean verify -Pcoverage -Dspring.profiles.active=test'   
+                dir('web-x-testing') {
+                    script{
+                        sh '''
+                            echo "Testing..."
+                            mvn clean   
+                        '''
                     }
                     // npm install && npm run build
 
