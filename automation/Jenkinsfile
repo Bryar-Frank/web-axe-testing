@@ -8,7 +8,7 @@ pipeline {
                     dir('web-x-testing') {
                         sh '''
                             echo 'Building...'
-                            ls -al       
+                            npm install && npm run build       
                         '''
                         // npm install && npm run build
                     }
