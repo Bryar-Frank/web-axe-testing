@@ -4,10 +4,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 dir('web-x-testing') {
+                 dir('axe-testing') {
                     script{
                         sh '''
-                            echo 'Building...'      
+                            echo 'Building...'
                         '''
                         // npm install && npm run build
                     }
@@ -17,7 +17,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                dir('web-x-testing') {
+                dir('axe-testing') {
                     script{
                         sh '''
                             echo "Testing..."
