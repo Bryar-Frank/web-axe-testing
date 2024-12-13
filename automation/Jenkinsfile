@@ -2,18 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            steps {
-                //  dir('axe-testing') {
-                //     script{
-                //         sh '''
-                //             echo 'Building...'
-                //         '''
-                //         // npm install && npm run build
-                //     }
-                }
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //          dir('axe-testing') {
+        //             script{
+        //                 sh '''
+        //                     echo 'Building...'
+        //                 '''
+        //                 // npm install && npm run build
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Test') {
             steps {
