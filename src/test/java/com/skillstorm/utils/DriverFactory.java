@@ -22,7 +22,9 @@ public class DriverFactory {
 
     private static WebDriver getChomeDriver() {
         ChromeOptions options = getOptionsChrome();
-        return new ChromeDriver(options);
+        ChromeDriver driver =  new ChromeDriver(options);
+        System.err.println("IS HEADLESS BROWSER? --> " + driver.headless);
+        return driver;
     }
 
     private static WebDriver getFoxDriver() {
@@ -40,9 +42,9 @@ public class DriverFactory {
 
         // Handle headless mode.
         if(headless) {
-        // if(true) {
             //Testing if we are getting to this run
             System.out.println("ADDING HEADLESS PROPERTIES");
+            
             chromeOptions.addArguments( List.of(
                 "--headless",
                 "--no-sandbox",
