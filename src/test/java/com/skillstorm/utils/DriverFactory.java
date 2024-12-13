@@ -21,43 +21,39 @@ public class DriverFactory {
     }
 
     private static WebDriver getChomeDriver() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(getDriverOptions());
+        ChromeOptions options = getOptionsChrome();
         return new ChromeDriver(options);
     }
 
     private static WebDriver getFoxDriver() {
         FirefoxOptions options = new FirefoxOptions();
-        options.addArguments(getDriverOptions());
+        // options.addArguments(getDriverOptions());
         return new FirefoxDriver(options);
     }
 
-    private static List<String> getDriverOptions() {
-        List<String> driverOptions;
+    private static ChromeOptions getOptionsChrome() {
+        ChromeOptions chromeOptions = new ChromeOptions();
 
         // Get system information
         String sysHeadless = System.getProperty("headless", "false");
         Boolean headless = Boolean.parseBoolean(sysHeadless);
 
         // Handle headless mode.
-        // if(headless) {
-        if(true) {
+        if(headless) {
+        // if(true) {
             //Testing if we are getting to this run
             System.out.println("ADDING HEADLESS PROPERTIES");
-            driverOptions = List.of(
+            chromeOptions.addArguments( List.of(
                 "--headless",
                 "--no-sandbox",
                 "--disable-dev-shm-usage",
                 "--disable-gpu",
                 "--window-size=1920,1080",
                 "--remote-debugging-pipe"
-            );
+            ));
         } 
-        // else {
-        //     driverOptions = new ArrayList<>();
-        // }
         
         // Create and return option list.
-        return driverOptions;
+        return chromeOptions;
     }
 }

@@ -27,7 +27,6 @@ public class AccessibilityStepDefintions {
     private static AxeBuilder axeBuilder;
     private static Results axeResults;
 
-
     @BeforeAll
     public static void setup() {
         driver = DriverFactory.getDriver("chrome");
@@ -38,13 +37,13 @@ public class AccessibilityStepDefintions {
 
     @AfterAll
     public static void teardown() {
-        if (driver != null) driver.quit();
+        if (driver != null)
+            driver.quit();
         wait = null;
     }
 
-
     @Given("i am on webpage {string}")
-    public void iAmOnWebpage(String url) {       
+    public void iAmOnWebpage(String url) {
         driver.get(url);
         wait.until(isOnPage -> {
             return driver.getCurrentUrl().equals(url);
@@ -52,22 +51,22 @@ public class AccessibilityStepDefintions {
     }
 
     /**
-     * Performs Axe-Core Testing again specified standards 
+     * Performs Axe-Core Testing again specified standards
+     * 
      * @param type - the type of checks that will be performed
-     *      Current options are: "Full", "WCAG Only", "Best Practices"
-     *      NOTE: capitalization doesn't matter
+     *             Current options are: "Full", "WCAG Only", "Best Practices"
+     *             NOTE: capitalization doesn't matter
      */
     @When("{string} accessibility checks are performed")
     public void accessibilityChecksArePerformed(String type) {
 
-        assertTrue( configureAxeBuilder(type),
-            "Failed to Configure Axe Builder"
-        );
-        
+        assertTrue(configureAxeBuilder(type),
+                "Failed to Configure Axe Builder");
+
         axeResults = axeBuilder.analyze(driver);
     }
 
-    @Then("there are no violations") 
+    @Then("there are no violations")
     public void thereAreNoViolations() {
         if (!axeResults.violationFree()) {
             String parsedViolations = buildAxeViolationMessage();
@@ -88,33 +87,31 @@ public class AccessibilityStepDefintions {
         return msg;
     }
 
-    
     private boolean configureAxeBuilder(String type) {
-        //Need to set this to a new AxeBuilder each time because it remembers the TAG choices from previous tests
+        // Need to set this to a new AxeBuilder each time because it remembers the TAG
+        // choices from previous tests
         axeBuilder = new AxeBuilder();
-        
-        List<String> axeTypes = List.of("Full", "WCAG only", "Best Practices");  
+
+        List<String> axeTypes = List.of("Full", "WCAG only", "Best Practices");
 
         switch (type.toUpperCase()) {
             case "FULL":
                 return true;
             case "WCAG ONLY":
-                axeBuilder = axeBuilder.withTags(List.of(                    
-                    "wcag2a",
-                    "wcag2aa",
-                    "wcag2aaa",
-                    "wcag21a",
-                    "wcag21aa",
-                    "wcag22aa"
-                ));
+                axeBuilder = axeBuilder.withTags(List.of(
+                        "wcag2a",
+                        "wcag2aa",
+                        "wcag2aaa",
+                        "wcag21a",
+                        "wcag21aa",
+                        "wcag22aa"));
                 return true;
             case "BEST PRACTICES":
                 axeBuilder = axeBuilder.withTags(List.of("best-practice"));
                 return true;
             default:
-                throw new InvalidArgumentException( String.format(
-                    "'%s' is not a valid arguement, please use one of the following: %s", type, axeTypes
-                ));
+                throw new InvalidArgumentException(String.format(
+                        "'%s' is not a valid arguement, please use one of the following: %s", type, axeTypes));
         }
     }
 }
