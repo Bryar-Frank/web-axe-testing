@@ -42,6 +42,8 @@ public class DriverFactory {
         // Handle headless mode.
         // if(headless) {
         if(true) {
+            //Testing if we are getting to this run
+            System.out.println("ADDING HEADLESS PROPERTIES");
             driverOptions = List.of(
                 "--headless",
                 "--no-sandbox",
