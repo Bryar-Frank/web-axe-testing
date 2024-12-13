@@ -7,8 +7,7 @@ pipeline {
                 script{
                     dir('web-x-testing') {
                         sh '''
-                            echo 'Building...'
-                            npm install && npm run build       
+                            echo 'Building...'      
                         '''
                         // npm install && npm run build
                     }
@@ -20,23 +19,21 @@ pipeline {
             steps {
                 script{
                     dir('web-x-testing') {
-                        sh '''
-                            echo "Testing..."
-                            ls -al       
-                        '''
-                        // npm install && npm run build
-
-                        // withSonarQubeEnv('SonarCloud') {
-                        //     sh '''
-                        //         npx sonar-scanner \
-                        //         -Dsonar.projectKey=maelstromdef_warehousemanager-frontend \
-                        //         -Dsonar.projectName=warehousemanager-frontend \
-                        //         -Dsonar.sources=src \
-                        //         -Dsonar.exclusions=**/__tests__/**,src/test/** \
-                                
-                        //     '''
-                        // }
+                        sh echo "Testing..."
+                        sh 'mvn clean verify -Pcoverage -Dspring.profiles.active=test'   
                     }
+                    // npm install && npm run build
+
+                    // withSonarQubeEnv('SonarCloud') {
+                    //     sh '''
+                    //         npx sonar-scanner \
+                    //         -Dsonar.projectKey=maelstromdef_warehousemanager-frontend \
+                    //         -Dsonar.projectName=warehousemanager-frontend \
+                    //         -Dsonar.sources=src \
+                    //         -Dsonar.exclusions=**/__tests__/**,src/test/** \
+                            
+                    //     '''
+                    // }
                 }
             }
         }
