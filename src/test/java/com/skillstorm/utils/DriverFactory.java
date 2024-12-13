@@ -23,7 +23,6 @@ public class DriverFactory {
     private static WebDriver getChomeDriver() {
         ChromeOptions options = getOptionsChrome();
         ChromeDriver driver =  new ChromeDriver(options);
-        System.err.println("IS HEADLESS BROWSER? --> " + driver.headless);
         return driver;
     }
 

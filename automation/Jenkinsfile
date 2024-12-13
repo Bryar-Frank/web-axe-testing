@@ -21,7 +21,6 @@ pipeline {
                     script{
                         sh '''
                             echo "Testing..."
-                            curl http://www.google.com/
                             mvn clean test -Dheadless=true 
                         '''
                     }
