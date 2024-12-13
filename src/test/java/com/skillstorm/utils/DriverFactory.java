@@ -40,7 +40,8 @@ public class DriverFactory {
         Boolean headless = Boolean.parseBoolean(sysHeadless);
 
         // Handle headless mode.
-        if(headless) {
+        // if(headless) {
+        if(true) {
             driverOptions = List.of(
                 "--headless",
                 "--no-sandbox",
@@ -49,9 +50,10 @@ public class DriverFactory {
                 "--window-size=1920,1080",
                 "--remote-debugging-pipe"
             );
-        } else {
-            driverOptions = new ArrayList<>();
-        }
+        } 
+        // else {
+        //     driverOptions = new ArrayList<>();
+        // }
         
         // Create and return option list.
         return driverOptions;

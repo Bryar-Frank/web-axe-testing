@@ -21,7 +21,7 @@ pipeline {
                     script{
                         sh '''
                             echo "Testing..."
-                            mvn clean   
+                            mvn clean test -Dheadless=true 
                         '''
                     }
                     // npm install && npm run build
