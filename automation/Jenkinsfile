@@ -2,9 +2,48 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo 'Hello World'
+                script{
+                    dir('web-x-testing') {
+                        sh '''
+                            echo 'Building...'
+                            ls ./        
+                        '''
+                        // npm install && npm run build
+                    }
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script{
+                    dir('web-x-testing') {
+                        sh '''
+                            echo "Testing..."
+                            ls ./        
+                        '''
+                        // npm install && npm run build
+
+                        // withSonarQubeEnv('SonarCloud') {
+                        //     sh '''
+                        //         npx sonar-scanner \
+                        //         -Dsonar.projectKey=maelstromdef_warehousemanager-frontend \
+                        //         -Dsonar.projectName=warehousemanager-frontend \
+                        //         -Dsonar.sources=src \
+                        //         -Dsonar.exclusions=**/__tests__/**,src/test/** \
+                                
+                        //     '''
+                        // }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
             }
         }
 
