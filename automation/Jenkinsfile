@@ -4,23 +4,24 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 dir('axe-testing') {
-                    script{
-                        sh '''
-                            echo 'Building...'
-                        '''
-                        // npm install && npm run build
-                    }
+                //  dir('axe-testing') {
+                //     script{
+                //         sh '''
+                //             echo 'Building...'
+                //         '''
+                //         // npm install && npm run build
+                //     }
                 }
             }
         }
 
         stage('Test') {
             steps {
-                dir('axe-testing') {
+                // dir('axe-testing') {
                     script{
                         sh '''
                             echo "Testing..."
+                            ls
                             mvn clean test -Dheadless=true 
                         '''
                     }
@@ -36,7 +37,7 @@ pipeline {
                             
                     //     '''
                     // }
-                }
+                // }
             }
         }
 
